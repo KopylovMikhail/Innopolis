@@ -14,6 +14,7 @@ public class Main {
         ob.addObject((Double) 6.3);
         ob.addObject("Hello!");
         ob.addObject(new int[]{3, 4, 5});
+        ob.addObject(new Object());
         System.out.println(ob.dump());
         ob.deleteObject(5);
         System.out.println(ob.dump());
