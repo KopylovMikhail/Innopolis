@@ -3,7 +3,7 @@ package lesson03.task02;
  * Программа проверяет работу методов созданного класса ObjectBox
  * ДЗ_3, задание 2
  * @author Михаил Копылов
- * @version 1.0
+ * @version 1.1
  */
 public class Main {
     public static void main(String[] args) {
