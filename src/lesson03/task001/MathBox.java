@@ -1,14 +1,11 @@
 package lesson03.task001;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 /**Класс получает массив Number и раскладывает элементы в коллекцию HashSet*/
 public class MathBox<T extends Number> {
 
-    private Set<Number> number = new HashSet<>(); //коллекция HashSet не допускает дублирования, что и нужно по условию задачи
+    private Set<T> number = new HashSet<>(); //коллекция HashSet не допускает дублирования, что и нужно по условию задачи
 
     public MathBox(T[] arrNumber) { //Конструктор на вход получает массив Number
         Collections.addAll(this.number, arrNumber);
@@ -17,27 +14,29 @@ public class MathBox<T extends Number> {
     /**метод summator, возвращающий сумму всех элементов коллекции*/
     public double summator () {
         double sum = 0;
-        for (Number n : number) {
+        for (T n : number) {
             sum += n.doubleValue();
         }
         return sum;
     }
 
-    /**метод splitter, выполняющий поочередное деление всех хранящихся в объекте элементов на делитель
+    /**метод splitter, выполняющий поочередное деление всех хранящихся в объекте элементов на делитель,
      * хранящиеся в объекте данные полностью заменяются результатами деления*/
     public void splitter(double div) {
-        Set<Number> tmpNum = new HashSet<>();
-        for (Number n: number) {
-            tmpNum.add(n.doubleValue()/div);
+        Set<T> tmpNum = new HashSet<>();
+        for (T n: number) {
+            Double temp = n.doubleValue()/div;
+            tmpNum.add((T) temp);
         }
         number = tmpNum;
     }
 /**метод delete получает на вход Integer и если такое значение есть в коллекции, удаляет его*/
     public void delete(Integer i) {
-        number.remove((double) i);
+        number.remove(i);
     }
-/**Getter возвращает коллекцию*/
-    public Set<Number> getNumber() {
+
+    /**Getter возвращает коллекцию*/
+    public Set<T> getNumber() {
         return number;
     }
 
