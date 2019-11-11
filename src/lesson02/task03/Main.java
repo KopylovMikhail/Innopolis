@@ -8,7 +8,7 @@ import static java.lang.Math.*;
  * Программа реализует сортировку объектов Person двумя разлтчными способами
  * ДЗ_2, задание 3
  * @author Михаил Копылов
- * @version 1.0
+ * @version 1.1
  */
 public class Main {
 
