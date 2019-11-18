@@ -22,6 +22,7 @@ public class PetCards {
     //поиск животного по его кличке
     public Pet searchPet (String name) {
         Pet pet = null;
+//        petCards.entrySet().contains(name);
         for (Map.Entry<Integer, Pet> entry : petCards.entrySet()) {
             Integer key = entry.getKey();
             Pet value = entry.getValue();
