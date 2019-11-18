@@ -26,6 +26,7 @@ public class Main {
                 set.add(str.toLowerCase()); //добавляем слова в коллекцию Set, приводим все строки к нижнему регистру
             }
         }
+        reader.close();
 
         list.addAll(set); //перемещаем коллекцию Set в List для сортировки
         Collections.sort(list);
@@ -36,5 +37,6 @@ public class Main {
             writer.write(s + "\n");
             writer.flush();
         }
+        writer.close();
     }
 }
