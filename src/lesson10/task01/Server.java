@@ -53,7 +53,9 @@ public class Server {
                 //Отправляем данные конкретному клиенту
 //                DatagramPacket dp = new DatagramPacket(s.getBytes() , s.getBytes().length , incoming.getAddress() , incoming.getPort());
                 //Отправляем данные по широковещательному адресу
-                DatagramPacket packet = new DatagramPacket(s.getBytes() , s.getBytes().length , broadcastAddr , incoming.getPort());
+//                DatagramPacket packet = new DatagramPacket(s.getBytes() , s.getBytes().length , broadcastAddr , incoming.getPort());
+                DatagramPacket packet = new DatagramPacket(s.getBytes() , s.getBytes().length , broadcastAddr, 5001);
+                socket.setBroadcast(true);
                 socket.send(packet);
             }
         }

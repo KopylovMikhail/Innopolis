@@ -25,7 +25,7 @@ public class Client {
     }
 
     void start() throws IOException {
-        DatagramSocket socket = new DatagramSocket();
+        DatagramSocket socket = new DatagramSocket(5001);
 
         System.out.println("Введите имя: ");
 
@@ -41,6 +41,8 @@ public class Client {
             //буфер для получения входящих данных
             byte[] buffer = new byte[65536];
             DatagramPacket reply = new DatagramPacket(buffer, buffer.length);
+//            InetAddress multiAddr = InetAddress.getByName("255.255.255.255"); //задаем широковещательный адрес
+//            DatagramPacket reply = new DatagramPacket(buffer, buffer.length, multiAddr,5001);
 
             //Получаем данные
             socket.receive(reply);
