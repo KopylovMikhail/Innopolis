@@ -44,13 +44,26 @@ public class Client {
 //            InetAddress multiAddr = InetAddress.getByName("255.255.255.255"); //задаем широковещательный адрес
 //            DatagramPacket reply = new DatagramPacket(buffer, buffer.length, multiAddr,5001);
 
+//            Thread inMessage = new Thread(() -> {
+//                try {
+//                    byte[] buffer = new byte[65536];
+//                    DatagramPacket reply = new DatagramPacket(buffer, buffer.length);
+//                    socket.receive(reply);
+//                    byte[] data = reply.getData();
+//                    String str = new String(data, 0, reply.getLength());
+//                    System.out.println(str);
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+//            });
+//            inMessage.start();
             //Получаем данные
             socket.receive(reply);
             byte[] data = reply.getData();
             s = new String(data, 0, reply.getLength());
+            System.out.println(s);
 
 //                System.out.println("Сервер: " + reply.getAddress().getHostAddress() + ", порт: " + reply.getPort() + ", получил: " + s);
-            System.out.println(s);
         }
     }
 }
