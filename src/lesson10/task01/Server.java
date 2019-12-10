@@ -8,29 +8,29 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Серверная часть многопользовательского чата
+ * Серверная часть многопользовательского чата по протоколу UDP
  * ДЗ_10
  * @author Михаил Копылов
  * @version 1.0
  */
 public class Server {
 
-    private static final int SERVER_PORT = 4999; // Прослушиваемый порт
+    private static final int SERVER_PORT = 4999; // прослушиваемый порт
+    private static final int REPLY_PORT = 5001; // порт для широковещательного ответа
+    private static final String IP_BROADCAST = "192.168.0.255"; //широковещательный IP-адрес
+
 
     public static void main(String[] args) {
 
         try {
-            //Создаем сокет
-            DatagramSocket socket = new DatagramSocket(SERVER_PORT);
 
-            //буфер для получения входящих данных
-            byte[] buffer = new byte[65536];
-            DatagramPacket incoming = new DatagramPacket(buffer, buffer.length);
+            DatagramSocket socket = new DatagramSocket(SERVER_PORT); //создаем сокет
+            byte[] buffer = new byte[65536]; //буфер для получения входящих данных
+            DatagramPacket incoming = new DatagramPacket(buffer, buffer.length); //входящий пакет
+            Map<InetAddress, String> map = new HashMap<>(); //карта IP-адресов клиентов и их имен
+            InetAddress broadcastAddr = InetAddress.getByName(IP_BROADCAST); //устанавливаем широковещательный адрес
 
             System.out.println("Ожидаем данные...");
-
-            Map<InetAddress, String> map = new HashMap<>(); //карта ip-адресов клиентов и их имен
-            InetAddress broadcastAddr = InetAddress.getByName("255.255.255.255"); //устанавливаем широковещательный адрес
 
             while(true) {
                 //Получаем данные
@@ -53,8 +53,8 @@ public class Server {
                 //Отправляем данные конкретному клиенту
 //                DatagramPacket dp = new DatagramPacket(s.getBytes() , s.getBytes().length , incoming.getAddress() , incoming.getPort());
                 //Отправляем данные по широковещательному адресу
-                DatagramPacket packet = new DatagramPacket(s.getBytes() , s.getBytes().length , broadcastAddr , incoming.getPort());
-                socket.setBroadcast(true);
+                DatagramPacket packet = new DatagramPacket(s.getBytes() , s.getBytes().length , broadcastAddr , REPLY_PORT);
+                socket.setBroadcast(true); //разрешаем широковещательную рассылку
                 socket.send(packet);
             }
         }

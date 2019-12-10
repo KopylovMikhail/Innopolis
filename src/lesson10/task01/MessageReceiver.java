@@ -4,7 +4,10 @@ import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 
-public class MessageReceiver implements Runnable {
+/**
+ * Класс получения сообщений по протоколу UDP
+ */
+public class MessageReceiver implements Runnable { //имплементим Runnable для возможности запуска в отдельном потоке
 
     private DatagramSocket socket;
 
@@ -14,7 +17,7 @@ public class MessageReceiver implements Runnable {
 
     @Override
     public void run() {
-        while (true) {
+        while (true) { //получаем сообщения в бесконечном цикле и выводим их на экран
             try {
                 byte[] buffer = new byte[65536];
                 DatagramPacket reply = new DatagramPacket(buffer, buffer.length);

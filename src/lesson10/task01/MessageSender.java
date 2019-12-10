@@ -7,7 +7,10 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 
-public class MessageSender implements Runnable {
+/**
+ * Класс отправки сообщений по протоколу UDP
+ */
+public class MessageSender implements Runnable { //имплементим Runnable для возможности запуска в отдельном потоке
 
     private BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
     private String serverAddr;
@@ -20,6 +23,7 @@ public class MessageSender implements Runnable {
         this.socket = socket;
     }
 
+    /**Метод отправки сообщения по протоколу UDP*/
     private void sendMessage(String s) throws IOException {
         byte[] b = s.getBytes();
         DatagramPacket packet = new DatagramPacket(b, b.length, InetAddress.getByName(serverAddr), serverPort);
@@ -29,11 +33,11 @@ public class MessageSender implements Runnable {
     @Override
     public void run() {
 
-        System.out.println("Введите имя: ");
+        System.out.println("Введите имя: "); //первым сообщением вводим имя
         while (true) {
             try {
                 String s;
-                s = reader.readLine();
+                s = reader.readLine(); //считываем с консоли и отправляем
                 sendMessage(s);
             } catch (IOException e) {
                 e.printStackTrace();
